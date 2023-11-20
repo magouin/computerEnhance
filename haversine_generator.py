@@ -34,8 +34,8 @@ def parse_arguments(arg):
 def generator(size):
     points = {"pairs": []}
     for _ in range(size):
-        points["pairs"].append({"x0": random.uniform(0, 180), "y0": random.uniform(0, 180),
-                                "x1": random.uniform(0, 180), "y1": random.uniform(0, 180)})
+        points["pairs"].append({"x0": round(random.uniform(0, 180), 5), "y0": round(random.uniform(0, 180), 5),
+                                "x1": round(random.uniform(0, 180), 5), "y1": round(random.uniform(0, 180), 5)})
     return points
 
 def get_expected_sum(points, radius):
@@ -54,7 +54,7 @@ def main(arg):
         json_points = json.dumps(points)
         f.write(json_points)
     expect = get_expected_sum(points, earth_radius)
-    print(f"Expected sum: {expect}")
+    print(f"Expected sum: {round(expect, 6)}")
     return 0
 
 if __name__ == '__main__':

@@ -211,14 +211,14 @@ int list_parse(struct s_json_parser_ctx jpctx) {
 }
 
 int number_parse(struct s_json_parser_ctx jpctx) {
-    long double num = 0;
+    double num = 0;
     char *end;
 
-    num = strtold(jpctx.start, &end);
+    num = strtod(jpctx.start, &end);
     if (end == jpctx.end + 1)
         jpctx.json->n_double = num;
     else {
-        fprintf(stderr, "In number parse // received %Lf: ", num);
+        fprintf(stderr, "In number parse // received %lf: ", num);
         json_parser_fail(jpctx);
         return -1;
     }
@@ -329,7 +329,7 @@ void json_value_print(struct s_json json, int tabs) {
     switch (json.type)
     {
     case DOUBLE:
-        printf("%Lf", json.n_double);
+        printf("%lf", json.n_double);
         break;
     case BOOL:
         printf("%d", json.boolean);

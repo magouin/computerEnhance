@@ -25,7 +25,7 @@ struct s_json {
         struct s_keyvals keyvals;
         struct s_list list;
         int boolean;
-        long double n_double;
+        double n_double;
         char *str;
     };
     enum e_json_type type;

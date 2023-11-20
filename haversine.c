@@ -7,19 +7,19 @@
 #define likely(x)       __builtin_expect(!!(x), 1)
 #define unlikely(x)     __builtin_expect(!!(x), 0)
 
-long double earth_radius = 6372.8;
+double earth_radius = 6372.8;
 
-long double radians(long double degres) {
-    long double radconv = M_PI / 180;
+double radians(double degres) {
+    double radconv = M_PI / 180;
 
     return (radconv * degres);
 }
 
-long double haversine(long double x0, long double x1, long double y0, long double y1, long double radius) {
-    long double ret;
-    long double dx = radians(x1 - x0);
-    long double dy = radians(y1 - y0);
-    long double a, c;
+double haversine(double x0, double x1, double y0, double y1, double radius) {
+    double ret;
+    double dx = radians(x1 - x0);
+    double dy = radians(y1 - y0);
+    double a, c;
 
     x0 = radians(x0);
     x1 = radians(x1);
@@ -36,9 +36,9 @@ enum e_points {
     Y1 = 1 << 3
 };
 
-int parse_point(struct s_json *ps, long double *ret) {
+int parse_point(struct s_json *ps, double *ret) {
     struct s_json *val;
-    long double points[4];
+    double points[4];
     int check = 0;
     char *key;
     int index;
@@ -76,10 +76,10 @@ int parse_point(struct s_json *ps, long double *ret) {
     return -1;
 }
 
-long double haversine_from_json(struct s_json_file *jfile) {
+double haversine_from_json(struct s_json_file *jfile) {
     struct s_json *obj;
-    long double ret;
-    long double values = 0;
+    double ret;
+    double values = 0;
 
     if (unlikely(jfile->json.type != KEYVAL))
         fprintf(stderr, "Json has to be a keyval\n");
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
     if ((ret = json_parse(&jfile)))
         return ret;
     json_unmap(&jfile);
-    printf("haversine average is: %Lf\n", haversine_from_json(&jfile));
+    printf("haversine average is: %lf\n", haversine_from_json(&jfile));
     // json_print(&jfile);
     json_file_free(&jfile);
 
