@@ -1,6 +1,8 @@
 #ifndef JSON_PARSER_H
 # define JSON_PARSER_H
 
+# include "profiling.h"
+
 enum e_json_type {
     LIST,
     BOOL,

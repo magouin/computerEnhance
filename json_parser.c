@@ -34,6 +34,8 @@ void json_parser_fail(struct s_json_parser_ctx jpctx) {
 int json_map(struct s_json_file *jfile) {
     struct stat st;
 
+    set_profile;
+
     jfile->fd = open(jfile->filename, O_RDONLY);
     if (jfile->fd == -1) {
         fprintf(stderr, "Failed to open\n");
@@ -270,6 +272,8 @@ int json_value_parse(struct s_json_parser_ctx jpctx) {
 int json_parse(struct s_json_file *jfile) {
     struct s_json_parser_ctx jpctx;
 
+    set_profile;
+
     jpctx.start = jfile->memory;
     jpctx.end = jfile->memory + jfile->size;
     jpctx.json = &jfile->json;
@@ -279,6 +283,8 @@ int json_parse(struct s_json_file *jfile) {
 void json_free(struct s_json json) {
     struct s_keyvals keyvals;
     struct s_list list;
+
+    set_profile;
 
     switch (json.type)
     {
@@ -307,10 +313,14 @@ void json_free(struct s_json json) {
 }
 
 void json_file_free(struct s_json_file *jfile) {
+    set_profile;
+
     json_free(jfile->json);
 }
 
 void json_unmap(struct s_json_file *jfile) {
+    set_profile;
+
     munmap(jfile->memory, jfile->mmap_size);
 }
 
@@ -325,6 +335,8 @@ void json_value_print(struct s_json json, int tabs) {
     struct s_keyvals keyvals;
     struct s_list list;
     int tabs_ = ((tabs >= 0) ? tabs + 1 : -1);
+
+    set_profile;
 
     switch (json.type)
     {
