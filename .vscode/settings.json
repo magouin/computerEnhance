@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "mman.h": "c",
+        "fcntl.h": "c",
+        "stat.h": "c",
+        "type_traits": "c",
+        "cmath": "c",
+        "limits": "c"
+    }
+}
